@@ -34,7 +34,7 @@
 |                  |  <- 0xffff0  (CS:IP = [0xf000:0xfff0]): Boot starts here and jumps to 0xef05b
 |     BIOS ROM     |
 |                  |  <- 0xef05b  (CS:IP = [0xf000:0xe05b])
-+------------------+  <- 0xF0000 (960KB)
++------------------+  <- 0xf0000 (960KB)
 |  16-bit devices, |
 |  expansion ROMs  |
 +------------------+  <- 0xC0000 (768KB)
@@ -46,6 +46,8 @@
 +------------------+  <- 0x00000000
 
 
+* When the BIOS starts, it performs several initialization routines. After that, it finds the fist bootable device, reads the bootloader
+from the disk and transfers control to it.
 
 * The bootloader is loaded to CS:IP =  [0000:7c00] (fixed and standardized) and must be 512 bytes long.
 
