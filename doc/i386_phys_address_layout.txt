@@ -1,4 +1,18 @@
 
+
+1 byte - 0..255 (256 unique values)
+
+0xF         - 15         (1 nibble)
+0xFF        - 255        (1 byte)
+0xFFFF      - 65535      (64 kB)
+0xA 0000    - 655360     (640KB)
+0xF FFFF    - 1048575    ( 1 MB)
+0x3FFF FFFF - 1073741823 ( 1 GB)
+0xFFFF FFFF - 4294967295 ( 4 GB)
+
+
+
+
 +------------------+  <- 0xFFFFFFFF (4GB)
 |      32-bit      |
 |  memory mapped   |
@@ -16,15 +30,22 @@
 | Extended Memory  |
 |                  |
 |                  |
-+------------------+  <- 0x00100000 (1MB)
++------------------+  <- 0x100000 (1MB)
+|                  |  <- 0xffff0  (CS:IP = [0xf000:0xfff0]): Boot starts here and jumps to 0xef05b
 |     BIOS ROM     |
-+------------------+  <- 0x000F0000 (960KB)
+|                  |  <- 0xef05b  (CS:IP = [0xf000:0xe05b])
++------------------+  <- 0xF0000 (960KB)
 |  16-bit devices, |
 |  expansion ROMs  |
-+------------------+  <- 0x000C0000 (768KB)
++------------------+  <- 0xC0000 (768KB)
 |   VGA Display    |
-+------------------+  <- 0x000A0000 (640KB)
++------------------+  <- 0xA0000 (640KB)
 |                  |
 |    Low Memory    |
 |                  |
 +------------------+  <- 0x00000000
+
+
+
+* The bootloader is loaded to CS:IP =  [0000:7c00] (fixed and standardized) and must be 512 bytes long.
+
